@@ -113,5 +113,5 @@ notes：
 
 5、总结
     mybatis整体架构分析，网上找的，如下：
-    ![Image text](https://raw.githubusercontent.com/liguangfu1220/mybatis-3/master/src/site/resources/note/source-atc.png)
+    ![Image text](https://raw.githubusercontent.com/liguangfu1220/mybatis-3/master/src/site/resources/note/source-atc.jpg)
     
