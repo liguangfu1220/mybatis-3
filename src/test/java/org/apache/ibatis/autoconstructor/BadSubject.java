@@ -15,6 +15,13 @@
  */
 package org.apache.ibatis.autoconstructor;
 
+/**
+ * 对应的也是 subject 表
+ * 和 AnnotatedSubject 不同，在其构造方法上，height 方法参数的类型是 Height ，而不是 Integer 。
+ * 因为 MyBatis 无法识别 Height 类，所以会创建 BadSubject 对象报错。
+ *
+ * 一般情况下，POJO 对象里，不使用基本类型。
+ */
 public class BadSubject {
   private final int id;
   private final String name;

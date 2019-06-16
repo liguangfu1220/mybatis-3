@@ -33,7 +33,7 @@ public class AnnotatedSubject {
   }
 
   /**
-   * @AutomapConstructor 注解，表示 MyBatis 查询后，在创建 AnnotatedSubject 对象，使用该构造方法。
+   * @AutomapConstructor 注解，表示 MyBatis 查询后，在创建 AnnotatedSubject 对象时，使用该构造方法。
    * @param id
    * @param name
    * @param age
