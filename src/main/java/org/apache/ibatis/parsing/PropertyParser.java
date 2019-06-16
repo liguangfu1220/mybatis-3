@@ -57,8 +57,17 @@ public class PropertyParser {
   }
 
   private static class VariableTokenHandler implements TokenHandler {
+    /**
+     * 变量 Properties 对象
+     */
     private final Properties variables;
+    /**
+     * 是否开启默认值功能。默认为 {@link #ENABLE_DEFAULT_VALUE} ，默认不开启
+     */
     private final boolean enableDefaultValue;
+    /**
+     * 默认值的分隔符。默认为 {@link #KEY_DEFAULT_VALUE_SEPARATOR} ，即 ":" 。
+     */
     private final String defaultValueSeparator;
 
     private VariableTokenHandler(Properties variables) {
@@ -73,9 +82,9 @@ public class PropertyParser {
 
     @Override
     public String handleToken(String content) {
-      if (variables != null) {
+      if (variables != null) {//检查 variables 的值是否为空
         String key = content;
-        if (enableDefaultValue) {
+        if (enableDefaultValue) {// 检查是否支持占位符中使用默认值的功能
           final int separatorIndex = content.indexOf(defaultValueSeparator);
           String defaultValue = null;
           if (separatorIndex >= 0) {

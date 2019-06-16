@@ -15,12 +15,11 @@
  */
 package org.apache.ibatis.parsing;
 
-import java.io.InputStream;
-import java.io.Reader;
-import java.io.StringReader;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Properties;
+import org.apache.ibatis.builder.BuilderException;
+import org.w3c.dom.Document;
+import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
+import org.xml.sax.*;
 
 import javax.xml.namespace.QName;
 import javax.xml.parsers.DocumentBuilder;
@@ -28,16 +27,12 @@ import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.xpath.XPath;
 import javax.xml.xpath.XPathConstants;
 import javax.xml.xpath.XPathFactory;
-
-import org.apache.ibatis.builder.BuilderException;
-import org.w3c.dom.Document;
-import org.w3c.dom.Node;
-import org.w3c.dom.NodeList;
-import org.xml.sax.EntityResolver;
-import org.xml.sax.ErrorHandler;
-import org.xml.sax.InputSource;
-import org.xml.sax.SAXException;
-import org.xml.sax.SAXParseException;
+import java.io.InputStream;
+import java.io.Reader;
+import java.io.StringReader;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Properties;
 
 /**
  * @author Clinton Begin
@@ -140,7 +135,9 @@ public class XPathParser {
   }
 
   public String evalString(Object root, String expression) {
+    //获取值
     String result = (String) evaluate(expression, root, XPathConstants.STRING);
+    //基于 variables 替换动态值，如果 result 为动态值
     result = PropertyParser.parse(result, variables);
     return result;
   }
@@ -210,14 +207,29 @@ public class XPathParser {
     return evalNode(document, expression);
   }
 
+  /**
+   * 主要为了动态值的替换
+   * @param root
+   * @param expression
+   * @return
+   */
   public XNode evalNode(Object root, String expression) {
+    // 获得 Node 对象
     Node node = (Node) evaluate(expression, root, XPathConstants.NODE);
     if (node == null) {
       return null;
     }
+    // 封装成 XNode 对象
     return new XNode(this, node, variables);
   }
 
+  /**
+   * 获得指定元素或节点的值
+   * @param expression 表达式
+   * @param root 指定节点
+   * @param returnType 返回类型
+   * @return 值 获得指定元素或节点的值
+   */
   private Object evaluate(String expression, Object root, QName returnType) {
     try {
       return xpath.evaluate(expression, root, returnType);
@@ -239,8 +251,9 @@ public class XPathParser {
       factory.setExpandEntityReferences(true);
 
       DocumentBuilder builder = factory.newDocumentBuilder();
+      //设置 EntityResolver 对象
       builder.setEntityResolver(entityResolver);
-      builder.setErrorHandler(new ErrorHandler() {
+      builder.setErrorHandler(new ErrorHandler() {// 实现都空的
         @Override
         public void error(SAXParseException exception) throws SAXException {
           throw exception;
@@ -255,6 +268,7 @@ public class XPathParser {
         public void warning(SAXParseException exception) throws SAXException {
         }
       });
+      //加载xml文件
       return builder.parse(inputSource);
     } catch (Exception e) {
       throw new BuilderException("Error creating document instance.  Cause: " + e, e);
