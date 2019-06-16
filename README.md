@@ -119,8 +119,9 @@ notes：
         SQL 语句的执行涉及多个组件 ，其中比较重要的是 Executor、StatementHandler、ParameterHandler 和 ResultSetHandler 。
         Executor 主要负责维护一级缓存和二级缓存，并提供事务管理的相关操作，它会将数据库相关操作委托给 StatementHandler完成。
         StatementHandler 首先通过 ParameterHandler 完成 SQL 语句的实参绑定，然后通过 java.sql.Statement 对象执行 SQL 语句并
-        得到结果集，最后通过 ResultSetHandler 完成结果集的映射，得到结果对象并返回。
-        ![Image text](https://raw.githubusercontent.com/liguangfu1220/mybatis-3/master/src/site/resources/note/sql-process.png)
+        得到结果集，最后通过 ResultSetHandler 完成结果集的映射，得到结果对象并返回。  
+   ![Image text](https://raw.githubusercontent.com/liguangfu1220/mybatis-3/master/src/site/resources/note/sql-process.png)
+   
     3.4 插件层
         对应 plugin 模块。
         Mybatis 自身的功能虽然强大，但是并不能完美切合所有的应用场景，因此 MyBatis 提供了插件接口，我们可以通过添加用户自定义
@@ -138,5 +139,5 @@ notes：
 5、总结
 
     mybatis整体架构分析，网上找的，如下：
-    ![Image text](https://raw.githubusercontent.com/liguangfu1220/mybatis-3/master/src/site/resources/note/source-atc.jpg)
+  ![Image text](https://raw.githubusercontent.com/liguangfu1220/mybatis-3/master/src/site/resources/note/source-atc.jpg)
     
