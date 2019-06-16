@@ -24,12 +24,15 @@ Essentials
 
 notes：
 1、mybatis整体架构图：
+    
     1、基础支持层
-    2、核心处理层
-    3、接口层
-    ![Image text](https://raw.githubusercontent.com/liguangfu1220/mybatis-3/master/src/site/resources/note/mybatis-architecture.png)
+    2、核心处理层  
+    3、接口层 
+    
+![Image text](https://raw.githubusercontent.com/liguangfu1220/mybatis-3/master/src/site/resources/note/mybatis-architecture.png)
     
 2、基础支持层
+
     基础支持层，包含整个 MyBatis 的基础模块，这些模块为核心处理层的功能提供了良好的支撑。
     2.1 反射模块
         对应 reflection 包。
@@ -82,6 +85,7 @@ notes：
         定义了 MyBatis 专有的 PersistenceException 和 TooManyResultsException 异常。
         
 3、核心处理器
+
     在核心处理层中，实现了 MyBatis 的核心处理流程，其中包括 MyBatis 的初始化以及完成一次数据库操作的涉及的全部流程 。
     3.1 配置解析
     对应 builder 和 mapping 模块。前者为配置解析过程，后者主要为 SQL 操作解析后的映射。
@@ -107,11 +111,13 @@ notes：
         由于用户自定义插件会影响 MyBatis 的核心行为，在使用自定义插件之前，开发人员需要了解 MyBatis 内部的原理，这样才能编写出安全、高效的插件。
 
 4、接口层
+
     对应 session 模块。
     接口层相对简单，其核心是 SqlSession 接口，该接口中定义了 MyBatis 暴露给应用程序调用的 API，也就是上层应用与 MyBatis 交互的桥梁。
     接口层在接收到调用请求时，会调用核心处理层的相应模块来完成具体的数据库操作。
 
 5、总结
+
     mybatis整体架构分析，网上找的，如下：
     ![Image text](https://raw.githubusercontent.com/liguangfu1220/mybatis-3/master/src/site/resources/note/source-atc.jpg)
     
