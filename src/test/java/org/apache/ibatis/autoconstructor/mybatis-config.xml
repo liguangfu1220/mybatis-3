@@ -24,6 +24,29 @@
 
     <!-- autoMappingBehavior should be set in each test case -->
 
+    <properties resource="" url="">
+        <property name="" value=""></property>
+    </properties>
+
+    <settings >
+        <setting name="" value=""/>
+    </settings>
+
+    <typeAliases >
+        <typeAlias type="com.googlecode.catchexception.CatchException" alias="" />
+        <package name="" />
+    </typeAliases>
+
+    <plugins>
+        <plugin interceptor="com.tiantian.mybatis.interceptor.MyInterceptor">
+            <property name="" value=""/>
+        </plugin>
+    </plugins>
+
+    <objectFactory type="">
+        <property name="" value=""/>
+    </objectFactory>
+
     <environments default="development">
         <environment id="development">
             <transactionManager type="JDBC">
@@ -37,8 +60,19 @@
         </environment>
     </environments>
 
+    <databaseIdProvider type="DB_VENDOR">
+        <property name="MySQL" value="mysql"/>
+        <property name="Oracle" value="oracle" />
+    </databaseIdProvider>
+
+    <typeHandlers>
+        <typeHandler jdbcType="VARCHAR" javaType="date" handler="com.xxx.handler.MyDateHandler" />
+        <package name="" />
+    </typeHandlers>
+
     <mappers>
-        <mapper resource="org/apache/ibatis/autoconstructor/AutoConstructorMapper.xml"/>
+        <mapper resource="org/apache/ibatis/autoconstructor/AutoConstructorMapper.xml" url="" class=""/>
+        <package name=""/>
     </mappers>
 
 </configuration>

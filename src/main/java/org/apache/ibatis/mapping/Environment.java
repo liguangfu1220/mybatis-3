@@ -15,9 +15,9 @@
  */
 package org.apache.ibatis.mapping;
 
-import javax.sql.DataSource;
-
 import org.apache.ibatis.transaction.TransactionFactory;
+
+import javax.sql.DataSource;
 
 /**
  * @author Clinton Begin
@@ -42,6 +42,7 @@ public final class Environment {
     this.dataSource = dataSource;
   }
 
+  //构造器  静态内部类，既能实现单例的延迟加载--提升性能，又能保证多线程下线程安全
   public static class Builder {
       private String id;
       private TransactionFactory transactionFactory;
